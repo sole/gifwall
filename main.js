@@ -14,8 +14,8 @@ GumHelper.startVideoStreaming(function(error, stream, videoEl, width, height) {
 
 
     videoElement = videoEl;
-	videoElement.width = width / 4;
-	videoElement.height = height / 4;
+	videoElement.width = width;
+	videoElement.height = height;
 
 	shooter = new VideoShooter(videoElement);
 

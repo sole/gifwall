@@ -33,3 +33,7 @@ main {
 #mosaic {
 	flex: auto;
 }
+
+#mosaic img {
+  display: inline-block;
+}
