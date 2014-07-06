@@ -1,4 +1,3 @@
-var previewContainer = document.getElementById('preview');
 var mosaicContainer = document.getElementById('mosaic');
 var videoElement;
 var shooter;
@@ -14,8 +13,6 @@ GumHelper.startVideoStreaming(function(error, stream, videoEl, width, height) {
 	videoElement.width = width / 4;
 	videoElement.height = height / 4;
 
-	previewContainer.appendChild(videoElement);
-	
 	shooter = new VideoShooter(videoElement);
 
 	startCapturing();
@@ -33,6 +30,10 @@ function startCapturing() {
 function onFrameCaptured(pictureData) {
 	var img = document.createElement('img');
 	img.src = pictureData;
+
+	img.style.width = videoElement.width + 'px';
+	img.style.height = videoElement.height + 'px';
+
 	mosaicContainer.insertBefore(img, mosaicContainer.firstChild);
 
 
