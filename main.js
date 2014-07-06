@@ -26,14 +26,11 @@ function startCapturing() {
 
 	console.log('start capturing, current number of images ', mosaicContainer.childElementCount);
 
-    //shooter = new VideoShooter(videoElement);
-
-	
 	shooter.getShot(function onDone(pictureData) {
 		console.log('ta-da');
 		var img = document.createElement('img');
 		img.src = pictureData;
-		mosaicContainer.appendChild(img);
+		mosaicContainer.insertBefore(img, mosaicContainer.firstChild);
 
 		setTimeout(startCapturing, 100);
 	
