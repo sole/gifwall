@@ -26,16 +26,17 @@ function startCapturing() {
 
 	console.log('start capturing, current number of images ', mosaicContainer.childElementCount);
 
-	shooter.getShot(function onDone(pictureData) {
-		console.log('ta-da');
-		var img = document.createElement('img');
-		img.src = pictureData;
-		mosaicContainer.insertBefore(img, mosaicContainer.firstChild);
-
-		setTimeout(startCapturing, 100);
-	
-	}, 4, 0.2, function onProgress(progress) {
+	shooter.getShot(onFrameCaptured, 4, 0.2, function onProgress(progress) {
 		console.log('done ', progress);
 	});
 
+}
+
+function onFrameCaptured(pictureData) {
+	console.log('ta-da');
+	var img = document.createElement('img');
+	img.src = pictureData;
+	mosaicContainer.insertBefore(img, mosaicContainer.firstChild);
+
+	setTimeout(startCapturing, 100);
 }
