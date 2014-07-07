@@ -14,8 +14,8 @@ GumHelper.startVideoStreaming(function(error, stream, videoEl, width, height) {
 
 
     videoElement = videoEl;
-	videoElement.width = width;
-	videoElement.height = height;
+	videoElement.width = width / 2;
+	videoElement.height = height / 2;
 
 	shooter = new VideoShooter(videoElement);
 
@@ -25,7 +25,7 @@ GumHelper.startVideoStreaming(function(error, stream, videoEl, width, height) {
 
 function startCapturing() {
 
-	shooter.getShot(onFrameCaptured, 4, 0.1, function onProgress(progress) {
+	shooter.getShot(onFrameCaptured, 3, 0.1, function onProgress(progress) {
 		console.log('done ', progress);
 	});
 
