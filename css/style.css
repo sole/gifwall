@@ -35,5 +35,5 @@ main {
 }
 
 #mosaic img {
-  display: inline-block;
+  vertical-align: bottom;
 }
