@@ -1,71 +1,77 @@
-var mosaicContainer = document.getElementById('mosaic');
-var videoElement;
-var shooter;
-var imagesPerRow = 5;
-var maxImages = 20;
+function init() {
 
-window.addEventListener('resize', onResize);
+	var mosaicContainer = document.getElementById('mosaic');
+	var videoElement;
+	var shooter;
+	var imagesPerRow = 5;
+	var maxImages = 20;
 
-GumHelper.startVideoStreaming(function(error, stream, videoEl, width, height) {
-	if(error) {
-		alert('Cannot open the camera. Sad times: ' + error.message);
-		return;
-	}
+	window.addEventListener('resize', onResize);
+
+	GumHelper.startVideoStreaming(function(error, stream, videoEl, width, height) {
+		if(error) {
+			alert('Cannot open the camera. Sad times: ' + error.message);
+			return;
+		}
 
 
-    videoElement = videoEl;
-	videoElement.width = width / 2;
-	videoElement.height = height / 2;
+		videoElement = videoEl;
+		videoElement.width = width / 2;
+		videoElement.height = height / 2;
 
-	shooter = new VideoShooter(videoElement);
+		shooter = new VideoShooter(videoElement);
 
-	startCapturing();
+		startCapturing();
 
-});
-
-function startCapturing() {
-
-	shooter.getShot(onFrameCaptured, 3, 0.1, function onProgress(progress) {
-		console.log('done ', progress);
 	});
 
-}
+	function startCapturing() {
 
-function onFrameCaptured(pictureData) {
-	var img = document.createElement('img');
-	img.src = pictureData;
+		shooter.getShot(onFrameCaptured, 3, 0.1, function onProgress(progress) {
+			console.log('done ', progress);
+		});
 
-	var imageSize = getImageSize();
-
-	img.style.width = imageSize[0] + 'px';
-	img.style.height = imageSize[1] + 'px';
-
-	mosaicContainer.insertBefore(img, mosaicContainer.firstChild);
-
-
-	if(mosaicContainer.childElementCount > maxImages) {
-		mosaicContainer.removeChild(mosaicContainer.lastChild);	
 	}
 
-	setTimeout(startCapturing, 100);
-}
+	function onFrameCaptured(pictureData) {
+		var img = document.createElement('img');
+		img.src = pictureData;
 
-function getImageSize() {
-	var windowWidth = window.innerWidth;
-	var imageWidth = Math.round(windowWidth / imagesPerRow);
-	var imageHeight = (imageWidth / videoElement.width) * videoElement.height;
+		var imageSize = getImageSize();
 
-	return [ imageWidth, imageHeight ];
-}
+		img.style.width = imageSize[0] + 'px';
+		img.style.height = imageSize[1] + 'px';
 
-function onResize(e) {
-	var imageSize = getImageSize();
-	var imageWidth = imageSize[0];
-	var imageHeight = imageSize[1];
+		mosaicContainer.insertBefore(img, mosaicContainer.firstChild);
 
-	for(var i = 0; i < mosaicContainer.childElementCount; i++) {
-		var img = mosaicContainer.children[i];
-		img.style.width = imageWidth + 'px';
-		img.style.height = imageHeight + 'px';
+
+		if(mosaicContainer.childElementCount > maxImages) {
+			mosaicContainer.removeChild(mosaicContainer.lastChild);	
+		}
+
+		setTimeout(startCapturing, 100);
 	}
+
+	function getImageSize() {
+		var windowWidth = window.innerWidth;
+		var imageWidth = Math.round(windowWidth / imagesPerRow);
+		var imageHeight = (imageWidth / videoElement.width) * videoElement.height;
+
+		return [ imageWidth, imageHeight ];
+	}
+
+	function onResize(e) {
+		var imageSize = getImageSize();
+		var imageWidth = imageSize[0];
+		var imageHeight = imageSize[1];
+
+		for(var i = 0; i < mosaicContainer.childElementCount; i++) {
+			var img = mosaicContainer.children[i];
+			img.style.width = imageWidth + 'px';
+			img.style.height = imageHeight + 'px';
+		}
+	}
+
 }
+
+window.addEventListener('DOMContentLoaded', init);
