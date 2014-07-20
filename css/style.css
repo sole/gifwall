@@ -12,18 +12,41 @@ body, html {
 }
 
 h1 {
+	font-family: 'Courier New', Courier, monospace;
+	font-size: 3rem;
 	position: absolute;
 	top: 0;
 	left: 0;
+	right: 0;
 	color: #fff;
 	text-shadow: 0 0 1rem #000;
-  text-align: center;
+	text-align: center;
+	padding: 1rem 0;
+	animation-name: title_anim;
+	animation-duration: 3s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+}
+
+@keyframes title_anim {
+	from  {
+		text-shadow: 0 0 1rem #f00;
+		color: #f00;
+	}
+	50% {
+		text-shadow: 0 0 1rem #0f0;
+		color: #0f0;
+	}
+	to {
+		text-shadow: 0 0 1rem #00f;
+		color: #00f;
+	}
 }
 
 main {
 	display: flex;
 	flex-direction: row;
-  line-height: 1;
+	line-height: 1;
 }
 
 #preview {
@@ -35,5 +58,5 @@ main {
 }
 
 #mosaic img {
-  vertical-align: bottom;
+	vertical-align: bottom;
 }
