@@ -26,13 +26,13 @@ function init() {
 
 		shooter = new VideoShooter(videoElement);
 
+		onResize();
+
 		startCapturing();
 
 	});
 
 	function startCapturing() {
-
-		onResize();
 		
 		shooter.getShot(onFrameCaptured, 10, 0.2, function onProgress(progress) {
 			// Not doing anything in the callback,

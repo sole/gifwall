@@ -26,6 +26,7 @@ h1 {
 	animation-duration: 3s;
 	animation-iteration-count: infinite;
 	animation-direction: alternate;
+	z-index: 50;
 }
 
 @keyframes title_anim {
