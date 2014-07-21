@@ -17,8 +17,8 @@ function init() {
 		}
 
 		videoElement = videoEl;
-		videoElement.width = width / 2;
-		videoElement.height = height / 2;
+		videoElement.width = width / 4;
+		videoElement.height = height / 4;
 		videoWidth = width;
 		videoHeight = height;
 
@@ -34,7 +34,7 @@ function init() {
 
 		onResize();
 		
-		shooter.getShot(onFrameCaptured, 3, 0.1, function onProgress(progress) {
+		shooter.getShot(onFrameCaptured, 10, 0.2, function onProgress(progress) {
 			// Not doing anything in the callback,
 			// but you could animate a progress bar or similar using the `progress` value
 		});
