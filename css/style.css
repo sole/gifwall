@@ -49,12 +49,16 @@ main {
 	line-height: 1;
 }
 
-#preview {
-	border: 4px solid red;
+main video {
+	z-index: 100;
+	position: absolute;
+	left: 0;
+	top: 0;
 }
 
-#mosaic {
+main #mosaic {
 	flex: auto;
+	z-index: 1;
 }
 
 #mosaic img {
