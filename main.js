@@ -14,7 +14,6 @@ function init() {
 			return;
 		}
 
-
 		videoElement = videoEl;
 		videoElement.width = width / 2;
 		videoElement.height = height / 2;
@@ -28,7 +27,8 @@ function init() {
 	function startCapturing() {
 
 		shooter.getShot(onFrameCaptured, 3, 0.1, function onProgress(progress) {
-			console.log('done ', progress);
+			// Not doing anything in the callback,
+			// but you could animate a progress bar using the `progress` value
 		});
 
 	}
@@ -44,12 +44,11 @@ function init() {
 
 		mosaicContainer.insertBefore(img, mosaicContainer.firstChild);
 
-
 		if(mosaicContainer.childElementCount > maxImages) {
 			mosaicContainer.removeChild(mosaicContainer.lastChild);	
 		}
 
-		setTimeout(startCapturing, 100);
+		setTimeout(startCapturing, 10);
 	}
 
 	function getImageSize() {
@@ -61,6 +60,12 @@ function init() {
 	}
 
 	function onResize(e) {
+
+		// Don't do anything until we have a video element from which to derive sizes
+		if(!videoElement) {
+			return;
+		}
+		
 		var imageSize = getImageSize();
 		var imageWidth = imageSize[0];
 		var imageHeight = imageSize[1];
